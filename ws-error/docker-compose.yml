@@ -1,0 +1,30 @@
+services:
+   monapache:
+      ports:
+      - "8888:80"
+      networks:
+      - netapp
+      build: .
+      volumes:
+      - ./:/var/www/html
+      - /var/log/apache2/app:/var/log/apache2/
+   bdd:
+      container_name: 'bdd'
+      image: mysql:8.1.0
+      ports:
+         - 3303:3306
+      environment:
+         MYSQL_ROOT_PASSWORD: 'password'
+         MYSQL_DATABASE: 'db'
+         MYSQL_USER: 'admin'
+         MYSQL_PASSWORD: 'password'
+      volumes:
+         - ./mysql_data:/var/lib/mysql 
+      networks:
+         - netbdd
+volumes:
+   mysql_data:
+
+networks:
+   netapp: {}
+   netbdd: {}
