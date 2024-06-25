@@ -1,6 +1,6 @@
 <?php
 namespace FwTest\Controller;
-use FwTest\Classes as Classes;
+use FwTest\Classes\ProductAction as ProduitAction;
 
 class ProductController extends AbstractController
 {
@@ -11,7 +11,7 @@ class ProductController extends AbstractController
     {
     	$db = $this->getDatabaseConnection();
 
-        $list_product = Classes\Product::getAll($db, 0, $this->array_constant['product']['nb_products']);
+        $list_product = ProduitAction::getAll($db, 0, $this->array_constant['product']['nb_products']);
 
         echo $this->render('product/list.tpl', ['list_product' => $list_product]);
 
@@ -28,7 +28,7 @@ class ProductController extends AbstractController
 
     	if (!empty($id)) {
 
-    		$product = new Classes\Product($db, $id);
+    		$product = new ProduitAction($db, $id);
 
     		if (!empty($product)) {
     			echo $this->render('product/detail_list.tpl', ['product' => $product]);

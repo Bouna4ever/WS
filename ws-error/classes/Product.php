@@ -1,6 +1,8 @@
 <?php
 namespace FwTest\Classes;
 
+use Exception;
+
 class ProductAction
 {
     /**
@@ -57,12 +59,12 @@ class ProductAction
      * @param      $db
      * @param      $datas
      *
-     * @throws Class_Exception
+     * @throws Exception
      */
 	public function __construct($db, $datas)
     {
         if (($datas != intval($datas)) && (!is_array($datas))) {
-            throw new Class_Exception('The given datas are not valid.');
+            throw new Exception('The given datas are not valid.');
         }
 
         $this->db = $db;
@@ -93,7 +95,7 @@ class ProductAction
 
 		if (!empty($result)) {
 			foreach ($result as $product) {
-				$array_product[] = new Product($db, $product);
+				$array_product[] = new ProductAction($db, $product);
 			}
 		}
 

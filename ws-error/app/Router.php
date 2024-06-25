@@ -29,7 +29,6 @@ class Router
     private static function saveRoutesFromFile($path)
     {
         $content = file_get_contents($path);
-        die($content);
 
         if (!preg_match('/class [a-z]+/i', $content, $arrayMatches)) {
             return ;
