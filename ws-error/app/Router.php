@@ -15,6 +15,7 @@ class Router
         $found = false;
 
         foreach ($arrayGlob as $filepath) {
+            $a = self::saveRoutesFromFile($filepath);
             if (self::saveRoutesFromFile($filepath)) {
                 $found = true;
                 break;
@@ -55,6 +56,10 @@ class Router
 
             if (!$docComment || !preg_match('/@Route\\(\'(.*)\'\\)/', $docComment, $arrayMatches)) {
                 continue;
+            }
+            if ($objectName == 'ProductController') {
+                print_r($arrayMatches);
+                die($currentUri);
             }
 
             $routeUri = $arrayMatches[1];
